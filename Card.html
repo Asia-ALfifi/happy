@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بطاقة التسامح</title>
+    
+  <link rel="icon" href="icon2.jpg" type="image/x-icon">
+  <link rel="shortcut icon" href="icon2.jpg" type="image/x-icon">
+   
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300&display=swap" rel="stylesheet">
+    
+    
+    <style>
+       
+        body{
+          font-family: Tajawal, sans-serif;
+
+          margin: 0;
+          padding-right: 1%;
+          display: flex;
+          flex-direction:column;
+          align-items:flex-start;
+          justify-content: center;
+           height: 100vh;
+            width: 100vw;
+
+
+        }
+        
+        span{
+            color: #37a8a2; 
+            font-weight: bold;
+        }
+        .Content{
+           
+            display: flex;
+            text-align: center;
+           flex-direction:row;
+            width: 100vw;
+          
+          
+        }
+        .Box{
+           /* margin-top: 0;*/
+            padding: 2%;
+           
+        }
+        
+        
+       
+        textarea {
+                  box-sizing: border-box;
+                   display: flex;
+                  flex-direction:column;
+                  width: 100%;
+                  padding: 10px;
+                  margin: 10px 0;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+                  outline: none;
+                  font-size: 16px;
+                }
+
+/* Style when the textarea is focused */
+        textarea:focus {
+                  outline: none;
+                  border-color: #007BFF; /* Change to your preferred focus color */
+                  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Change to your preferred focus shadow */
+                }
+        
+        textarea:hover,
+        textarea:focus {
+          border-color: #3498db;
+} 
+
+    
+          button {
+            
+              display: flex;
+              flex-direction:column;
+              padding: 10px 20px;
+              font-size: 16px;
+              text-align: center;
+              text-decoration: none;
+              cursor: pointer;
+              border: 1px solid #3498db;
+              border-radius: 5px;
+              color: #fff;
+              background-color: #3498db;
+              transition: background-color 0.3s;
+        }
+         button:hover {
+                background-color: #2980b9;
+                }
+        
+        /* أسلوب حقل الإدخال */
+    input {
+      box-sizing: border-box;
+      display: flex;
+      flex-direction:column;
+      font: bold;
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      outline: none;
+      font-size: 16px;
+    }
+
+/* تحويل الحقل عند التحويل إليه */
+input:hover,
+input:focus {
+  border-color: #3498db;
+} 
+        
+        
+      @media (max-width: 600px) {
+          canvas {
+            width: 100%;
+            height: auto;
+
+          }
+          input{
+              width: 100%;
+          }
+          textarea
+          {
+              width: 100%;
+          }
+          
+           .Content{
+             display: flex;
+            text-align: center;
+           flex-direction:column;
+            width: 100vw;
+          
+        }
+        .Box{
+            
+          
+        }
+          
+        }
+
+   
+    </style>
+
+ 
+</head>
+<body>
+    <h1> التسامح</h1>
+        <p> التسامح ليس بمصطلح جديد في ديننا الإسلامي , فالإسلام يحثنا دائماً على التسامح والتراحم في أبسط الامور<br><span> ولأنكِ جزءٌ مهم من عائلة علماء الغد نهديكِ هذه البطاقة لِتَخُطي عليها كلماتكِ المميزة وترسليها لمن اردتِ التسامح معها  
+         </span></p>
+    <div class ="Content">
+         
+        <div class="Box">
+           
+            <canvas id="myCanvas" width="500" height="500" style="border:1px solid #000;"></canvas>
+        </div>
+        <div class="Box">
+            <input placeholder="إلى" id="input1"> 
+            <textarea id="multilineInput" name="multilineInput" rows="4" cols="50" placeholder="محتوى الرسالة"></textarea>
+
+            <input placeholder="من" id="input2" > 
+
+            <button onclick="saveImage()">حفظ الصورة</button>
+        </div>
+        </div>
+    
+    <script>
+    
+    // Get the input and textarea elements
+    var input1 = document.getElementById("input1");
+    var input2 = document.getElementById("input2");
+    var textarea = document.getElementById("multilineInput");
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    var image = new Image();
+    image.src = 'x.jpeg';
+      
+     image.onload = function() {
+      ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+    };
+
+    // Add input event listeners to the inputs and textarea
+    input1.addEventListener("input", syncCanvas);
+    input2.addEventListener("input", syncCanvas);
+    textarea.addEventListener("input", syncCanvas);
+        
+        
+     function syncCanvas() {
+      // Get the text from the inputs and textarea
+      var text1 = input1.value;
+      var text2 = input2.value;
+      var textAreaText = textarea.value;
+
+      // Clear the canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+     ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+
+      // Set the font and draw the text on the canvas
+     ctx.font = "bold 15px Tajawal";
+      ctx.fillStyle = "#37a8a2";
+     // ctx.textAlign = "rig";
+      ctx.fillText("إلى: "+ text1, 445, 180);
+         
+         
+     ctx.font = "15px Tajawal";
+     ctx.fillStyle = "black";
+       // Split the multiline text into an array of lines
+      var lines = textAreaText.split('\n');
+      
+        // Draw each line on the canvas
+      var lineHeight = 20; // Adjust as needed
+      var i = 0;
+      for (; i < lines.length; i++) {
+        ctx.fillText(lines[i], 445 , 220 + i *lineHeight );
+      }
+    
+       ctx.font = "bold 15px Tajawal";
+        ctx.fillStyle = "#37a8a2";
+      ctx.fillText("من: "+text2,445, 240 +i *lineHeight);
+         
+         
+
+    }
+    
+        function saveImage() {
+      // احصل على بيانات الصورة من ال canvas
+      var imageData = canvas.toDataURL('image/png');
+
+      // إنشاء رابط (link) لتحميل الصورة
+      var link = document.createElement('a');
+      link.href = imageData;
+      link.download = 'بطاقة التسامح.png';
+
+      // إضافة الرابط إلى الصفحة وتشغيل النقر عليه تلقائيًا
+      document.body.appendChild(link);
+      link.click();
+
+      // إزالة الرابط من الصفحة
+      document.body.removeChild(link);
+    }
+     
+    </script>
+           
+ 
+  
+             
+
+</body>
+</html>
